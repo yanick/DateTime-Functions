@@ -2,15 +2,14 @@ package DateTime::Functions;
 
 use 5.006;
 use strict;
-use base 'Exporter';
-use vars qw( @EXPORT $VERSION );
+use warnings;
+use parent 'Exporter';
 
-$VERSION = '0.10';
+our $VERSION = '0.11';
 
 use DateTime ();
-use Exporter;
 
-@EXPORT = qw(
+our @EXPORT = qw(
     datetime from_epoch now today from_object
     last_day_of_month from_day_of_year default_locale
     compare compare_ignore_floating duration
