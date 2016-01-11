@@ -4,6 +4,7 @@ Revision history for Perl module DateTime::Functions
     - Added "use warnings", changed "use vars" to use our variables,
       and changed from "use base" to "use parent".
     - Updated Changes file to follow format in CPAN::Changes::Spec
+    - Changed license section in doc to have expected head1 text
     - Switched to Dist::Zilla
 
 0.10 2010-12-08 AUDREYT

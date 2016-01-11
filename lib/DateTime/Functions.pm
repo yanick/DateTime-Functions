@@ -113,10 +113,11 @@ L<DateTime>
 
 唐鳳 E<lt>cpan@audreyt.orgE<gt>
 
-=head1 CC0 1.0 Universal
+=head1 COPYRIGHT AND LICENSE
 
-To the extent possible under law, 唐鳳 has waived all copyright and related
-or neighboring rights to DateTime-Functions.
+唐鳳 has dedicated the work to the Commons by waiving all of his or her rights to the work worldwide under copyright law and all related or neighboring legal rights he or she had in the work, to the extent allowable by law.
+
+Works under CC0 do not require attribution. When citing the work, you should not imply endorsement by the author.
 
 This work is published from Taiwan.
 
