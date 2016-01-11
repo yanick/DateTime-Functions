@@ -1,13 +1,15 @@
-[Changes for 0.10 - 2010-12-09]
+Revision history for Perl module DateTime::Functions
 
-* LICENSING CHANGE: This compilation and all individual files in it
-  are now under the nullary CC0 1.0 Universal terms:
+0.11 2016-01-11 NEILB
+    - Updated Changes file to follow format in CPAN::Changes::Spec
 
-  To the extent possible under law, 唐鳳 has waived all copyright and
-  related or neighboring rights to Module-Signature.
+0.10 2010-12-08 AUDREYT
+    - LICENSING CHANGE: This compilation and all individual files in it
+      are now under the nullary CC0 1.0 Universal terms:
+      To the extent possible under law, 唐鳳 has waived all copyright and
+      related or neighboring rights to Module-Signature.
+    - Updated Module::Install to 1.00.
 
-* Updated Module::Install to 1.00.
+0.01 2003-11-01 AUTRIJUS
+    - Initial CPAN release
 
-[Changes for 0.01 - 2003-11-01]
-
-* Initial CPAN release.
