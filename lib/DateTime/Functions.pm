@@ -109,7 +109,7 @@ sub duration {
 
 L<DateTime>
 
-=head1 AUTHORS
+=head1 AUTHOR
 
 唐鳳 E<lt>cpan@audreyt.orgE<gt>
 
@@ -124,3 +124,4 @@ This work is published from Taiwan.
 L<http://creativecommons.org/publicdomain/zero/1.0>
 
 =cut
+
