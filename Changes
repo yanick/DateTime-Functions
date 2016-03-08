@@ -1,5 +1,11 @@
 Revision history for Perl module DateTime::Functions
 
+0.12 2016-03-08 NEILB
+    - ASCIIfied Audrey's name in dist.ini, so it will end up as ASCII
+      in Makefile.PL. The kanji was causing a panic on an old Perl.
+      I should fix this properly, but Audrey++ was ok with me ASCII'ing
+      her name, which was the quicker route to all green on CPAN Testers.
+
 0.11 2016-01-11 NEILB
     - Added "use warnings", changed "use vars" to use our variables,
       and changed from "use base" to "use parent".
