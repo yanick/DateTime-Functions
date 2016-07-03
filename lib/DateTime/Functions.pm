@@ -5,8 +5,6 @@ use strict;
 use warnings;
 use parent 'Exporter';
 
-our $VERSION = '0.11';
-
 use DateTime ();
 
 our @EXPORT = qw(
@@ -20,11 +18,6 @@ our @EXPORT = qw(
 =head1 NAME
 
 DateTime::Functions - Procedural interface to DateTime functions
-
-=head1 VERSION
-
-This document describes version 0.10 of DateTime::Functions, released
-December 9, 2010
 
 =head1 SYNOPSIS
 

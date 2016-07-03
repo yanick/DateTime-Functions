@@ -1,5 +1,9 @@
 Revision history for Perl module DateTime::Functions
 
+0.12 2016-07-03 NEILB
+    - Still had $VERSION hard-coded in the module, instead of letting
+      DZ set it for me. Thanks to MANWAR who pointed this out.
+
 0.12 2016-03-08 NEILB
     - ASCIIfied Audrey's name in dist.ini, so it will end up as ASCII
       in Makefile.PL. The kanji was causing a panic on an old Perl.
