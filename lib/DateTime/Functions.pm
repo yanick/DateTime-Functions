@@ -3,7 +3,8 @@ package DateTime::Functions;
 use 5.006;
 use strict;
 use warnings;
-use parent 'Exporter';
+
+use parent 'Exporter::Tiny';
 
 use DateTime ();
 
@@ -28,13 +29,43 @@ DateTime::Functions - Procedural interface to DateTime functions
 =head1 DESCRIPTION
 
 This module simply exports all class methods of L<DateTime> into the
-caller's namespace.
+caller's namespace. The exporting is done via L<Exporter::Tiny>.
 
 =head1 METHODS
 
 Unless otherwise noted, all methods correspond to the same-named class
 method in L<DateTime>.  Please see L<DateTime> for which parameters are
 supported.
+
+It is also possible to specify a DateTime formatter to be used.
+
+    use DateTime::Functions { formatter => 'ISO8601' };
+
+    my $date = datetime( '2017-01-01' );
+
+If a formatter is provided, the exported C<datetime> function will 
+be a call for the formatter's C<parse_datetime>, and every
+exported function creating a L<DateTime> object will pass it the 
+additional argument C< formatter => $formatter >. By default C<DateTime::Format::>
+is preprended to the formatter name. If the formatter isn't part of that namespace,
+use a C<+> prefix.
+
+    use DateTime::Functions { formatter => '+My::Formatter' };
+
+Note that since C<DateTime::Functions> uses L<Exporter::Tiny>, its exporting 
+abilities can be used to do things like
+
+    use DateTime::Functions { formatter => 'SQLite' },
+                            datetime => { -as => 'dt_sqlite' };
+
+    use DateTime::Functions { formatter => 'ICal' }, 'now';
+
+    print "".dt_sqlite( '2017-09-12 01:02:03' ); 
+    # => '2017-09-12 01:02:03'
+
+    print "".now();  
+    # => '20170912T203633Z'
+
 
 =head2 Constructors
 
@@ -82,13 +113,40 @@ Equivalent to C<< DateTime->DefaultLocale( $locale ) >>.
 
 =cut
 
-foreach my $func (@EXPORT) {
-    no strict 'refs';
-    my $method = $func;
-    next if $func eq 'duration';
-    $method = 'new' if $func eq 'datetime';
-    $method = 'DefaultLocale' if $func eq 'default_locale';
-    *$func = sub { DateTime->can($method)->('DateTime', @_) };
+sub _exporter_expand_sub {
+    my ($self, $name, $args, $globals) = @_;
+
+    die "'$name' is not exported by $self" 
+        unless grep { $_ eq $name } @EXPORT;
+
+    return ( duration => \&duration ) if $name eq 'duration';
+
+    my $method = $name;
+
+    my $formatter = $globals->{formatter};
+    if ( $formatter ) {
+        $formatter = 'DateTime::Format::'.$formatter
+            unless $formatter =~ s/\+//;
+
+        require Module::Runtime;
+        Module::Runtime::use_module($formatter);
+    }
+
+    if ( $name eq 'datetime' ) {
+        return ( datetime => $formatter 
+            ?  sub { my $dt = $formatter->parse_datetime(@_); $dt->set_formatter($formatter); $dt; }
+            :  sub { DateTime->new(@_) }
+        );
+    }
+
+    $method = 'DefaultLocale' if $name eq 'default_locale';
+
+    return ( $name => sub { 
+            DateTime->can($method)->('DateTime', 
+                ( formatter => $formatter ) x !!$formatter,
+                @_
+            )
+        } );
 }
 
 sub duration {
